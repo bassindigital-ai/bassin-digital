@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /merci.html
+Disallow: /merci-contact.html
+Disallow: /en/thank-you.html
+
+Sitemap: https://bassindigital.com/sitemap.xml

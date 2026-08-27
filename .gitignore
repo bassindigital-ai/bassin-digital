@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Rushes vidéo lourds (>100 Mo) — restent en local, hors GitHub
+*.mov
+site/flowaway-macbook.mov
+site/flowaway-rotato-macbook.mov
+
+# Doublon vidéo dans la function Netlify
+site/netlify/flowaway.mp4
+
+# Secrets / env
+.env
+.env.*
+*.key
+*.pem
+
+# Dépendances
+node_modules/
+
+# Base de données locale de prospection
+agent_prospection/*.db
+agent_prospection/*.db-journal
+_github_ready/
+_test.command
+
+# Dossiers de travail (hors site) — ne pas publier sur GitHub
+/videos/
+/images/
+/_divers/
+/agent_prospection/
+/Bassin_Digital_Offre_IA.docx
+/docs/
+
+# Dossiers de travail internes — ne pas publier sur GitHub (ajouté le 26/08/2026)
+/prospection/
+/BRIEF_MALT_IA.md
+/BRIEF_SERVICES_IA_2026.md
+/Audit_Instagram_BassinDigital.html
+
+# Garde-fou : aucun document interne dans le dossier déployé
+site/docs/

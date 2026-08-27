@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Bassin Digital</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://bassindigital.com/">
+<meta http-equiv="refresh" content="0; url=/#contact">
+<script>
+(function () {
+  /* Anciens liens "contact.html?sujet=care" → formulaire de l'accueil pré-rempli */
+  var map = { 'care': 'Maintenance CARE', 'care-plus': 'Maintenance CARE+', 'diagnostic': 'Diagnostic IA gratuit (30 min)' };
+  var sujet = null;
+  try { sujet = new URLSearchParams(location.search).get('sujet'); } catch (e) {}
+  var target = '/#contact';
+  if (sujet && map[sujet]) target = '/?besoin=' + encodeURIComponent(map[sujet]) + '#contact';
+  location.replace(target);
+})();
+</script>
+<style>body{font-family:Jost,'Helvetica Neue',Arial,sans-serif;font-weight:300;color:#1d1d1f;padding:3rem 1.5rem;text-align:center}a{color:#1a7a6e}</style>
+</head>
+<body>
+<p>Le formulaire de contact se trouve maintenant sur l'accueil. <a href="/#contact">Continuer vers le formulaire →</a></p>
+</body>
+</html>

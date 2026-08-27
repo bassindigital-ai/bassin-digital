@@ -1,0 +1,7 @@
+# Configuration Netlify — Bassin Digital
+[build]
+  publish = "site"
+  command = ""
+
+[build.environment]
+  NODE_VERSION = "20"

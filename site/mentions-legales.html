@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script src="consent.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mentions légales du site Bassin Digital. Informations éditeur, hébergement, propriété intellectuelle, données personnelles et cookies.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2dd4bf">
+    <link rel="canonical" href="https://bassindigital.com/mentions-legales.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 60 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='29' fill='%231a7a6e'/%3E%3Cpath d='M13 30 C17 21 24 21 30 30 C36 39 43 39 47 30' stroke='%23f0ece6' stroke-width='2.2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+    <title>Mentions Légales — Bassin Digital</title>
+    <link rel="alternate" hreflang="fr" href="https://bassindigital.com/mentions-legales.html">
+    <link rel="alternate" hreflang="en" href="https://bassindigital.com/en/legal-notice.html">
+    <link rel="alternate" hreflang="x-default" href="https://bassindigital.com/mentions-legales.html">
+
+    <!-- Google Fonts: Cormorant Garamond + Jost -->
+    <link rel="stylesheet" href="fonts.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #2dd4bf;
+            --navy: #0a1628;
+            --cream: #1d1d1f;
+            --bg: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #6e6e73;
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            cursor: auto;
+        }
+
+        a {
+            cursor: auto;
+        }
+
+        /* ─── NAV ─── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 2rem 3rem; }
+        .nav-logo-wrap { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; }
+        .nav-logo-svg { width: 32px; height: 32px; flex-shrink: 0; }
+        .nav-logo { font-size: 0.68rem; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(29,29,31,0.5); text-decoration: none; }
+        .nav-logo span { color: var(--teal); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-link { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(29,29,31,0.4); text-decoration: none; transition: color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #1d1d1f; }
+        .burger { display: none; flex-direction: column; align-items: flex-end; gap: 6px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 310; }
+        .burger span { display: block; height: 1px; background: #1d1d1f; transition: transform 0.4s ease, width 0.4s ease; transform-origin: right; }
+        .burger span:first-child { width: 24px; }
+        .burger span:last-child { width: 14px; }
+        .burger.on span:first-child { transform: translateY(3.5px) rotate(45deg); width: 24px; }
+        .burger.on span:last-child { transform: translateY(-3.5px) rotate(-45deg); width: 24px; }
+        .backdrop { position: fixed; inset: 0; z-index: 250; background: rgba(0,0,0,0); transition: background 0.5s ease; pointer-events: none; }
+        .backdrop.on { background: rgba(0,0,0,0.55); pointer-events: all; }
+        .panel { position: fixed; top: 0; right: 0; bottom: 0; z-index: 300; width: 260px; background: #ffffff; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.6s cubic-bezier(0.76,0,0.24,1); pointer-events: none; }
+        .panel.on { transform: translateX(0); pointer-events: all; }
+        .panel-line { position: absolute; top: 20%; left: 0; bottom: 20%; width: 1px; background: var(--teal); opacity: 0.4; transform: scaleY(0); transform-origin: center; transition: transform 0.5s ease 0.35s; pointer-events: none; }
+        .panel.on .panel-line { transform: scaleY(1); }
+        .panel-head { padding: 1.8rem 1.5rem; display: flex; justify-content: flex-end; flex-shrink: 0; position: relative; z-index: 2; }
+        .x-btn { width: 32px; height: 32px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; }
+        .x-btn::before, .x-btn::after { content: ''; position: absolute; width: 16px; height: 1px; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+        .x-btn::before { transform: rotate(45deg); }
+        .x-btn::after { transform: rotate(-45deg); }
+        .x-btn:hover::before, .x-btn:hover::after { background: #1d1d1f; }
+        .panel-nav { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; position: relative; z-index: 2; }
+        .panel-nav a { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(29,29,31,0.4); text-decoration: none; padding: 0.7rem 0; opacity: 0; transform: translateX(12px); transition: opacity 0.4s ease, transform 0.5s ease, color 0.3s; }
+        .panel.on .panel-nav a { opacity: 1; transform: translateX(0); }
+        .panel-nav a:nth-child(1) { transition-delay: 0.15s; }
+        .panel-nav a:nth-child(2) { transition-delay: 0.22s; }
+        .panel-nav a:nth-child(3) { transition-delay: 0.29s; }
+        .panel-nav a:nth-child(4) { transition-delay: 0.36s; }
+        .panel-nav a:hover, .panel-nav a.on { color: #1d1d1f; }
+        nav::before { content: ''; position: absolute; inset: 0; height: 120px; background: linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, transparent 100%); pointer-events: none; z-index: -1; }
+        @media (max-width: 768px) { nav { padding: 1.5rem; } .nav-links { display: none; } .burger { display: flex; } }
+
+        /* Main Content */
+        main {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+
+        /* Top blur mask */
+        main::before {
+            content: '';
+            position: fixed;
+            top: 120px;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(180deg, #ffffff 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .hero {
+            padding: 80px 64px 60px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            margin-bottom: 60px;
+        }
+
+        .hero .eyebrow {
+            font-family: 'Jost', sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--teal);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 300;
+            color: #1d1d1f;
+            margin-bottom: 0;
+            letter-spacing: -1px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-wrapper {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 64px 120px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .legal-section {
+            padding-bottom: 48px;
+            margin-bottom: 48px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .legal-section.vis {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .legal-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .legal-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #1d1d1f;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .legal-section p {
+            font-family: 'Jost', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            color: #6e6e73;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .legal-section p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .legal-section strong {
+            font-weight: 400;
+            color: #1d1d1f;
+        }
+
+        .legal-section a {
+            color: var(--teal);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+        }
+
+        .legal-section a:hover {
+            color: #1d1d1f;
+            border-bottom-color: rgba(45, 212, 191, 0.2);
+        }
+
+        .site-footer { position: relative; z-index: 10; background: #f5f5f7; padding: 3rem; border-top: 1px solid rgba(0,0,0,0.08); }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; }
+        .footer-left { display: flex; align-items: center; gap: 0.8rem; }
+        .footer-logo-text { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(29,29,31,0.4); }
+        .footer-logo-text span { color: rgba(45,212,191,0.6); }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(29,29,31,0.4); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: rgba(29,29,31,0.7); }
+        .footer-copy { font-size: 0.52rem; color: rgba(29,29,31,0.3); letter-spacing: 0.05em; }
+        @media (max-width: 768px) { .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; } .footer-links { gap: 1.2rem; } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem; }
+            .nav-links { display: none; }
+            .burger { display: flex; }
+
+            .hero {
+                padding: 60px 32px 50px;
+                margin-bottom: 50px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .content-wrapper {
+                padding: 0 32px 100px;
+            }
+
+            .legal-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .site-footer {
+                padding: 60px 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 48px 16px 40px;
+                margin-bottom: 40px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero .eyebrow {
+                font-size: 11px;
+            }
+
+            .content-wrapper {
+                padding: 0 16px 80px;
+            }
+
+            .legal-section {
+                padding-bottom: 32px;
+                margin-bottom: 32px;
+            }
+
+            .legal-section h2 {
+                font-size: 1.2rem;
+                margin-bottom: 16px;
+            }
+
+            .legal-section p {
+                font-size: 14px;
+            }
+
+            .site-footer {
+                padding: 40px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+      <a href="index.html" class="nav-logo-wrap">
+        <svg class="nav-logo-svg" viewBox="0 0 60 60" fill="none">
+          <circle cx="30" cy="30" r="29" fill="#2D4A5A"/>
+          <circle cx="30" cy="30" r="22" stroke="white" stroke-opacity="0.12" stroke-width="0.8" fill="none"/>
+          <circle cx="30" cy="30" r="15" stroke="white" stroke-opacity="0.08" stroke-width="0.8" fill="none"/>
+          <path d="M13 30 C17 21, 24 21, 30 30 C36 39, 43 39, 47 30" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M16 30 C19 24, 25 24, 30 30 C35 36, 41 36, 44 30" stroke="white" stroke-width="1.1" stroke-opacity="0.3" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="nav-logo">Bassin<span>.</span>Digital</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="configurer.html" class="nav-link">Services</a>
+        <a href="about.html" class="nav-link">À propos</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu"><span></span><span></span></button>
+    </nav>
+    <div class="backdrop" id="backdrop"></div>
+    <div class="panel" id="panel">
+      <div class="panel-line"></div>
+      <div class="panel-head"><button class="x-btn" id="x-btn" aria-label="Fermer le menu"></button></div>
+      <nav class="panel-nav">
+        <a href="index.html">Accueil</a>
+        <a href="configurer.html">Services</a>
+        <a href="about.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="eyebrow">Informations légales</div>
+            <h1>Mentions <em>légales</em></h1>
+        </section>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- 1. Éditeur du Site -->
+            <section class="legal-section rv">
+                <h2>1. Éditeur du site</h2>
+                <p>Le site <strong>bassindigital.com</strong> est édité par :</p>
+                <p><strong>Bassin Digital</strong> — entrepreneur individuel (ინდივიდუალური მეწარმე / <i>Individual Entrepreneur</i>) enregistré en <strong>Géorgie</strong></p>
+                <p><strong>Dirigeant et responsable de la publication :</strong> Adam Brunet</p>
+                <p><strong>Numéro d'identification :</strong> [à compléter]</p>
+                <p><strong>Adresse :</strong> [à compléter], Géorgie</p>
+                <p><strong>Email :</strong> <a href="mailto:bassindigital@gmail.com">bassindigital@gmail.com</a></p>
+                <p><strong>Activité :</strong> Conception et développement de sites web, conseil en stratégie digitale, automatisation par intelligence artificielle</p>
+                <p><strong>TVA :</strong> Bassin Digital relève du statut géorgien de petite entreprise et n'est pas assujettie à la TVA. Les factures sont émises sans TVA (voir les <a href="cgv.html#a4">conditions générales de vente</a>).</p>
+                <p><strong>Zone d'intervention :</strong> France, Europe et international — 100 % à distance.</p>
+            </section>
+
+            <!-- 2. Hébergement -->
+            <section class="legal-section rv">
+                <h2>2. Hébergement</h2>
+                <p>Le site est hébergé par :</p>
+                <p><strong>Netlify, Inc.</strong></p>
+                <p>512 2nd Street, Suite 200 — San Francisco, CA 94107, États-Unis</p>
+                <p><strong>Site web :</strong> <a href="https://www.netlify.com" target="_blank" rel="noopener">www.netlify.com</a></p>
+            </section>
+
+            <!-- 3. Propriété Intellectuelle -->
+            <section class="legal-section rv">
+                <h2>3. Propriété intellectuelle</h2>
+                <p>L'ensemble des éléments composant le site bassindigital.com — textes, images, graphismes, logos, icônes, animations, code source, design et architecture — sont la propriété exclusive de Bassin Digital ou font l'objet d'une autorisation d'utilisation.</p>
+                <p>Toute reproduction, représentation, modification, publication, adaptation ou exploitation de tout ou partie de ces éléments, quel que soit le moyen ou le procédé utilisé, est interdite sans l'autorisation écrite préalable de Bassin Digital.</p>
+                <p>Toute exploitation non autorisée du site ou de ses éléments engage la responsabilité de son auteur au titre du droit d'auteur applicable.</p>
+            </section>
+
+            <!-- 4. Données Personnelles & RGPD -->
+            <section class="legal-section rv">
+                <h2>4. Protection des données personnelles</h2>
+                <p>Bassin Digital est établie en Géorgie et applique le <strong>Règlement Général sur la Protection des Données</strong> (RGPD — Règlement UE 2016/679) chaque fois qu'il s'applique à ses traitements, notamment lorsqu'elle propose ses services à des personnes situées dans l'Union européenne (article 3.2 du règlement). Elle est par ailleurs soumise à la loi géorgienne sur la protection des données à caractère personnel.</p>
+                <p><strong>Responsable du traitement :</strong> Adam Brunet — <a href="mailto:bassindigital@gmail.com">bassindigital@gmail.com</a></p>
+                <p><strong>Données collectées :</strong> Les seules données personnelles collectées le sont via le formulaire de contact (nom, adresse email, message) et le configurateur de projet (choix d'options, montant). Ces données sont utilisées exclusivement pour répondre à vos demandes et traiter vos commandes.</p>
+                <p><strong>Base légale :</strong> Le traitement est fondé sur votre consentement (article 6.1.a du RGPD) et l'exécution de mesures précontractuelles (article 6.1.b).</p>
+                <p><strong>Durée de conservation :</strong> Les données du formulaire de contact sont conservées 12 mois. Les données liées aux commandes sont conservées conformément aux obligations comptables et fiscales en vigueur (10 ans).</p>
+                <p><strong>Destinataires :</strong> Vos données ne sont transmises à aucun tiers, sauf obligation légale. Le site est hébergé par Netlify, Inc., qui traite à ce titre les soumissions de formulaires selon sa propre politique de confidentialité. Aucune donnée bancaire n'est collectée par le site (voir la section 6).
+                <p><strong>Vos droits :</strong> Vous disposez d'un droit d'accès, de rectification, d'effacement, de portabilité, de limitation et d'opposition au traitement de vos données. Vous pouvez également définir des directives relatives au sort de vos données après votre décès.</p>
+                <p>Pour exercer ces droits, adressez votre demande à <a href="mailto:bassindigital@gmail.com">bassindigital@gmail.com</a> en joignant une copie d'un justificatif d'identité. Une réponse vous sera apportée dans un délai de 30 jours.</p>
+                <p><strong>Transferts hors de l'Union européenne :</strong> vos données sont traitées depuis la Géorgie, pays qui ne fait pas l'objet d'une décision d'adéquation de la Commission européenne. Ces transferts sont encadrés par les <strong>clauses contractuelles types</strong> adoptées par la Commission européenne (décision d'exécution (UE) 2021/914), disponibles sur demande.</p>
+                <p>En cas de litige, vous pouvez introduire une réclamation auprès de l'autorité de protection des données de votre pays de résidence — en France, la CNIL : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a> — ou auprès du Service géorgien de protection des données personnelles (<i>Personal Data Protection Service of Georgia</i>).</p>
+            </section>
+
+            <!-- 5. Cookies -->
+            <section class="legal-section rv">
+                <h2>5. Cookies</h2>
+                <p>Le site bassindigital.com utilise deux catégories de traceurs.</p>
+                <p><strong>Traceurs strictement nécessaires</strong> — ils assurent le fonctionnement technique du site et la mémorisation de votre choix en matière de mesure d'audience. Ils ne nécessitent pas votre consentement, conformément aux règles applicables au dépôt de traceurs dans votre pays de résidence (en France, l'article 82 de la loi Informatique et Libertés).</p>
+                <p><strong>Mesure d'audience (Google Analytics 4)</strong> — elle nous permet de savoir combien de personnes visitent le site et quelles pages les intéressent. Elle n'est <strong>activée qu'après votre accord explicite</strong>, recueilli par le bandeau affiché lors de votre première visite, avec anonymisation de l'adresse IP. Tant que vous n'avez pas accepté, aucun script de mesure n'est chargé. Vous pouvez revenir sur votre choix à tout moment en effaçant les données de site de votre navigateur.</p>
+                <p>Aucun cookie publicitaire, de profilage ou de reciblage marketing n'est déposé sur votre terminal.</p>
+                <p>Vous pouvez à tout moment paramétrer votre navigateur pour accepter ou refuser les cookies.</p>
+            </section>
+
+            <!-- 6. Paiement en ligne -->
+            <section class="legal-section rv">
+                <h2>6. Paiement</h2>
+                <p>Le configurateur de projet ne procède à <strong>aucun encaissement</strong> : sa validation vaut demande de réservation. Aucune coordonnée bancaire ne transite par le site, et Bassin Digital n'en collecte aucune.</p>
+                <p>Le devis définitif et la facture d'acompte vous sont adressés sous 24 heures ouvrées. Le règlement s'effectue par <strong>virement bancaire</strong> sur l'IBAN européen indiqué sur la facture : acompte de 30 % à la commande, solde selon les conditions convenues au devis.</p>
+                <p>Le droit de rétractation applicable aux clients consommateurs est décrit à l'<a href="cgv.html#a17">article 17 des conditions générales de vente</a>.</p>
+            </section>
+
+            <!-- 7. Responsabilité -->
+            <section class="legal-section rv">
+                <h2>7. Limitation de responsabilité</h2>
+                <p>Bassin Digital s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur le site. Toutefois, Bassin Digital ne saurait être tenu responsable des erreurs, omissions ou résultats obtenus suite à l'utilisation de ces informations.</p>
+                <p>L'accès au site peut être interrompu à tout moment, sans préavis, pour des raisons de maintenance ou de force majeure, sans que cela ne puisse donner lieu à une quelconque indemnisation.</p>
+                <p>Les liens hypertextes présents sur le site redirigeant vers des sites tiers sont fournis à titre informatif. Bassin Digital décline toute responsabilité quant au contenu de ces sites externes.</p>
+            </section>
+
+            <!-- 8. Conditions générales de vente -->
+            <section class="legal-section rv">
+                <h2>8. Conditions générales de prestation</h2>
+                <p>Toute commande passée via le configurateur de projet constitue une demande de devis. La prestation démarre après acceptation du devis définitif et réception de l'acompte de 30%.</p>
+                <p>Les prix affichés sur le configurateur sont exprimés en euros. Bassin Digital n'étant pas assujettie à la TVA, les factures sont émises sans TVA ; les clients professionnels établis dans l'Union européenne relèvent du régime de l'autoliquidation. Le détail figure à l'<a href="cgv.html#a4">article 4 des conditions générales de vente</a>.</p>
+                <p>Les délais de livraison sont donnés à titre indicatif et communiqués dans le devis. Un retard de livraison ne saurait donner lieu à l'annulation de la commande ni au versement de dommages-intérêts.</p>
+            </section>
+
+            <!-- 9. Droit Applicable -->
+            <section class="legal-section rv">
+                <h2>9. Droit applicable et juridiction compétente</h2>
+                <p>Les présentes mentions légales sont régies par le <strong>droit géorgien</strong>. En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les tribunaux compétents de Géorgie seront saisis.</p>
+                <p>Si vous êtes consommateur et que vous résidez dans l'Union européenne, ces stipulations ne vous privent pas de la protection des dispositions impératives de la loi de votre pays de résidence habituelle, ni de la possibilité de saisir les juridictions de ce pays. La plateforme européenne de règlement en ligne des litiges (RLL / ODR) a définitivement fermé le 20 juillet 2025 ; vous pouvez vous adresser au Centre européen des consommateurs de votre pays.</p>
+                <p>Le détail des conditions applicables aux prestations figure dans les <a href="cgv.html">conditions générales de vente</a>.</p>
+            </section>
+
+            <!-- 10. Crédits -->
+            <section class="legal-section rv">
+                <h2>10. Crédits</h2>
+                <p><strong>Conception et développement :</strong> Bassin Digital</p>
+                <p><strong>Typographies :</strong> Cormorant Garamond &amp; Jost (Google Fonts, licence libre)</p>
+                <p><strong>Hébergement :</strong> Netlify</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <svg width="20" height="20" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="29" fill="#2D4A5A"/><path d="M13 30 C17 21, 24 21, 30 30 C36 39, 43 39, 47 30" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+          <span class="footer-logo-text">Bassin<span>.</span>Digital</span>
+        </div>
+        <div class="footer-links">
+          <a href="configurer.html">Services</a>
+          <a href="about.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="cgv.html">CGV</a>
+            <a href="mentions-legales.html">Mentions légales</a>
+        </div>
+        <span class="footer-copy">&copy; 2026 Bassin Digital &middot; Tous droits réservés</span>
+      </div>
+    </footer>
+
+    <script>
+        // Standard Burger Menu (runs immediately, DOM is ready since script is at bottom)
+        var burger = document.getElementById('burger');
+        var panel = document.getElementById('panel');
+        var backdrop = document.getElementById('backdrop');
+        var xBtn = document.getElementById('x-btn');
+        function openMenu() { burger.classList.add('on'); panel.classList.add('on'); backdrop.classList.add('on'); document.body.style.overflow = 'hidden'; }
+        function closeMenu() { burger.classList.remove('on'); panel.classList.remove('on'); backdrop.classList.remove('on'); document.body.style.overflow = ''; }
+        burger.addEventListener('click', openMenu);
+        xBtn.addEventListener('click', closeMenu);
+        backdrop.addEventListener('click', closeMenu);
+        document.querySelectorAll('.panel-nav a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+
+        // GSAP animations (wait for deferred scripts to load)
+        window.addEventListener('load', function() {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                var sections = document.querySelectorAll('.legal-section.rv');
+                sections.forEach(function(section) {
+                    gsap.to(section, {
+                        scrollTrigger: {
+                            trigger: section,
+                            start: 'top 85%',
+                            onEnter: function() { section.classList.add('vis'); },
+                            once: true
+                        }
+                    });
+                });
+            } else {
+                // Fallback: show all sections without animation
+                document.querySelectorAll('.legal-section.rv').forEach(function(s) { s.classList.add('vis'); });
+            }
+        });
+    </script>
+</body>
+</html>
